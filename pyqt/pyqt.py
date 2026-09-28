@@ -1,7 +1,10 @@
-import sys
+﻿import sys
 import rclpy as rp
 
 from PyQt5.QtWidgets import *
+from PyQt5.QtGui import QKeySequence
+from PyQt5.QtWidgets import QShortcut
+
 from pyqt_project_pkg.publisher import TurtlesimPublisher
 from pyqt_project_pkg.reset_service import TurtlesimReset
 from pyqt_project_pkg.pose_data import TurtlesimPose
@@ -50,6 +53,17 @@ class Window(QMainWindow):
 
         self.reset_btn.clicked.connect(self.reset)
         self.pose_btn.clicked.connect(self.get_data)
+
+        self.direction_shortcuts = []
+        for key, button in (
+            ('Up', self.front_btn),
+            ('Down', self.backward_btn),
+            ('Left', self.left_btn),
+            ('Right', self.right_btn),
+        ):
+            shortcut = QShortcut(QKeySequence(key), self)
+            shortcut.activated.connect(button.click)
+            self.direction_shortcuts.append(shortcut)
 
         window.setLayout(main_layout)
         self.setCentralWidget(window)
