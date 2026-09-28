@@ -1,0 +1,12 @@
+# 기본적으로 전부 무시
+*
+
+# .gitignore 자체는 포함
+!.gitignore
+
+# 필요한 폴더/파일만 포함
+!pyqt/
+!pyqt/**
+!pyqt_project_pkg/
+!pyqt_project_pkg/**
+!rosdb.sql
